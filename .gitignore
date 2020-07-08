@@ -1,0 +1,10 @@
+.venv/
+
+plot/**
+!plot/.gitkeep
+
+out/**
+!out/.gitkeep
+
+source/**
+!source/.gitkeep
