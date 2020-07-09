@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-def getSeries(file_name, col):
+def get_series(file_name, col):
     df = pd.read_csv(file_name)
     series = getattr(df, col)
     return series
@@ -11,7 +11,7 @@ def getSeries(file_name, col):
 
 def min(file_name, col):
     # prepare data series
-    series = getSeries(file_name, col)
+    series = get_series(file_name, col)
 
     # calculation
     min = series.min()
@@ -21,7 +21,7 @@ def min(file_name, col):
 
 def max(file_name, col):
     # prepare data series
-    series = getSeries(file_name, col)
+    series = get_series(file_name, col)
 
     # calculation
     max = series.max()
@@ -31,7 +31,7 @@ def max(file_name, col):
 
 def median(file_name, col):
     # prepare data series
-    series = getSeries(file_name, col)
+    series = get_series(file_name, col)
 
     # calculation
     med = series.median()
@@ -41,7 +41,7 @@ def median(file_name, col):
 
 def std(file_name, col):
     # prepare data series
-    series = getSeries(file_name, col)
+    series = get_series(file_name, col)
 
     # calculation
     std = np.std(series)
@@ -49,7 +49,7 @@ def std(file_name, col):
     return std
 
 
-def writeTableToCSV(file_name, table):
+def write_table_to_csv(file_name, table):
     f = open(file_name, "w")
     for row in table:
         for element in row:
