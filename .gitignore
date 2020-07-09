@@ -1,12 +1,13 @@
 .venv/
 
-plot/**
-!plot/.gitkeep
+in/**
+!in/.gitkeep
 
 out/**
 !out/.gitkeep
 
-source/**
-!source/.gitkeep
+!out/plot/
+out/plot/**
+!out/plot/.gitkeep
 
 **/__pycache__/
