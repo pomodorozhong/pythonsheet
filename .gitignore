@@ -8,3 +8,5 @@ out/**
 
 source/**
 !source/.gitkeep
+
+**/__pycache__/
