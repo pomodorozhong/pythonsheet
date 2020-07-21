@@ -1,65 +1,25 @@
-import pandas as pd
 import numpy as np
 
 
-def get_series(file_name, col):
-    df = pd.read_csv(file_name)
-    series = getattr(df, col)
-    return series
-
-
-def min(file_name, col):
-    # prepare data series
-    series = get_series(file_name, col)
-
-    # calculation
+def min(series):
     min = series.min()
 
     return min
 
 
-def max(file_name, col):
-    # prepare data series
-    series = get_series(file_name, col)
-
-    # calculation
+def max(series):
     max = series.max()
 
     return max
 
 
-def median(file_name, col):
-    # prepare data series
-    series = get_series(file_name, col)
-
-    # calculation
+def median(series):
     med = series.median()
 
     return med
 
 
-def std(file_name, col):
-    # prepare data series
-    series = get_series(file_name, col)
-
-    # calculation
+def std(series):
     std = np.std(series)
 
     return std
-
-
-def write_table_to_csv(file_name, table):
-    f = open(file_name, "w")
-    for row in table:
-        for element in row:
-            f.write(str(element)+",")
-        f.write("\n")
-    f.close()
-
-
-def write_1d_array_to_csv(file_name, array):
-    f = open(file_name, "w")
-    for element in array:
-        f.write(str(element)+",")
-        f.write("\n")
-    f.close()
