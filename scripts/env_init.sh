@@ -10,6 +10,7 @@ cd ..
 
 # Make directory to store input/output file.
 mkdir in
+mkdir out
 mkdir out/plot
 
 # Make directory for Python venv
