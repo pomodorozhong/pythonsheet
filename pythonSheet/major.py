@@ -23,3 +23,9 @@ def std(series):
     std = np.std(series)
 
     return std
+
+
+def add(series, num: float):
+    out = series + num
+
+    return out

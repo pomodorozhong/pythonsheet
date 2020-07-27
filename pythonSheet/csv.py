@@ -22,3 +22,7 @@ def write_1d_array_to_csv(file_name, array):
         f.write(str(element)+",")
         f.write("\n")
     f.close()
+
+
+def write_dataframe_to_csv(file_name, dataframe):
+    dataframe.to_csv(file_name)

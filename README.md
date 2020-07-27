@@ -1,11 +1,13 @@
-# pythonSheet
+# pythonsheet
 
-This project is made to do some basic spreadsheet workflow using numpy and stuff.
+A Tool for basic spreadsheet workflow.
 
 ## To Install Dependencies
 
-`python3 -m venv .venv`
+OS X & Linux:
 
-`source .venv/bin/activate`
-
-`pip3 install -r requirements.txt`
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
+```

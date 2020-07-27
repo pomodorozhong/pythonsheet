@@ -26,3 +26,8 @@ def index(references: 'series', rows_to_extract: 'series'):
             result.append(references[row])
 
     return result
+
+
+def combine_series_to_dataframe(series_array):
+    dataframe = pd.concat(series_array, axis=1)
+    return dataframe
