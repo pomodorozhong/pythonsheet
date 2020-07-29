@@ -29,3 +29,7 @@ def write_1d_array_to_csv(file_name, array):
 
 def write_dataframe_to_csv(file_name, dataframe):
     dataframe.to_csv(file_name)
+
+
+def write_series_to_csv(file_name, series):
+    series.to_csv(file_name)
