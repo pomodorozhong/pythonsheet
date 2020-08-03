@@ -4,8 +4,8 @@ import pythonsheet.pythonsheet.file as pfile
 import pythonsheet.pythonsheet.csv_ as csv
 
 
-files_in = ["./pythonsheet/usage_example/get_bias_series_from_raw/raw.csv"]
-files_out = ["./pythonsheet/usage_example/get_bias_series_from_raw/bias.csv"]
+files_in = ["./pythonsheet/usage_example/get_bias_from_raw/raw.csv"]
+files_out = ["./pythonsheet/usage_example/get_bias_from_raw/bias.csv"]
 ground_truth = 75
 
 for i in range(len(files_in)):
