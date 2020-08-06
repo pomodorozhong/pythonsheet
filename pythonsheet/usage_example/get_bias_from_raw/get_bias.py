@@ -1,6 +1,4 @@
-import pythonsheet.pythonsheet.utility as utility
 import pythonsheet.pythonsheet.major as pm
-import pythonsheet.pythonsheet.file as pfile
 import pythonsheet.pythonsheet.csv_ as csv
 
 
