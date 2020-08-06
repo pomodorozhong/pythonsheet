@@ -35,7 +35,7 @@ def combine_series_to_dataframe(series_array):
     return dataframe
 
 
-def fit(x: 'series', y: 'series', deg: int, plot_file=""):
+def fit(x: 'series', y: 'series', deg: int, plot_file="", upper_bound=None, lower_bound=None):
 
     df = combine_series_to_dataframe([x, y])
 
@@ -46,6 +46,10 @@ def fit(x: 'series', y: 'series', deg: int, plot_file=""):
     df[y.name] = pd.to_numeric(df[y.name])
 
     # remove outliers
+    if upper_bound:
+        df = df[df[y.name] < upper_bound]
+    if lower_bound:
+        df = df[df[y.name] > lower_bound]
     df = df[(np.abs(stats.zscore(df)) < 4).all(axis=1)]
 
     x = getattr(df, x.name)
