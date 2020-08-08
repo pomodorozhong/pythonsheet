@@ -35,7 +35,16 @@ def combine_series_to_dataframe(series_array):
     return dataframe
 
 
-def fit(x: 'series', y: 'series', deg: int, plot_file="", upper_bound=None, lower_bound=None):
+def fit(x: 'series', y: 'series', deg: int,
+        plot_file="",
+        upper_bound=None,
+        lower_bound=None,
+        pass_zero=False):
+
+    def fit_poly_through_origin(x, y, n=1):
+        a = x[:, np.newaxis] ** np.arange(1, n+1)
+        coeff = np.linalg.lstsq(a, y)[0]
+        return np.concatenate(([0], coeff))
 
     df = combine_series_to_dataframe([x, y])
 
@@ -54,19 +63,24 @@ def fit(x: 'series', y: 'series', deg: int, plot_file="", upper_bound=None, lowe
 
     x = getattr(df, x.name)
     y = getattr(df, y.name)
-    model = np.polyfit(x, y, deg)
-    predict = np.poly1d(model)
+    if pass_zero:
+        model = fit_poly_through_origin(x, y, deg)
+    else:
+        model = np.polynomial.polynomial.polyfit(x, y, deg)
+    predict = np.polynomial.Polynomial(model)
 
     if plot_file != "":
-        # plotting
-        x_lin_reg = range(0, 51)
-        y_lin_reg = predict(x_lin_reg)
+        # clear plot
         plt.clf()
-        plt.scatter(x, y)
+
+        # plotting
+        x_lin_reg = range(0, 2000)
+        y_lin_reg = predict(x_lin_reg)
+        plt.plot(x, y, 'kx')
         plt.plot(x_lin_reg, y_lin_reg, c='r')
-        plt.title(predict.c)
+        plt.title(predict)
 
         # save plot
         plt.savefig(plot_file)
 
-    return predict.c
+    return predict
