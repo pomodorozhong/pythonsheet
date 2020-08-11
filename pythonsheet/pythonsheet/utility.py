@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
+from . import major as pm
+import math
 
 
 def match(search_keys: 'series', search_range: 'series'):
@@ -74,7 +76,13 @@ def fit(x: 'series', y: 'series', deg: int,
         plt.clf()
 
         # plotting
-        x_lin_reg = range(0, 2000)
+        x_min = pm.min(x)
+        x_max = pm.max(x)
+        x_diff = x_max - x_min
+        plot_x_min = math.floor(x_min - x_diff * 0.1)
+        plot_x_max = math.ceil(x_max + x_diff * 0.1)
+
+        x_lin_reg = range(plot_x_min, plot_x_max)
         y_lin_reg = predict(x_lin_reg)
         plt.plot(x, y, 'kx')
         plt.plot(x_lin_reg, y_lin_reg, c='r')
