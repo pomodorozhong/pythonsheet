@@ -15,8 +15,8 @@ def _fit_poly_through_origin(x, y, n=1):
 
 def fit(x: 'series', y: 'series', deg: int,
         plot_file="",
-        upper_bound=None,
-        lower_bound=None,
+        y_upper_bound=None,
+        y_lower_bound=None,
         pass_zero=False):
 
     df = pu.combine_series_to_dataframe([x, y])
@@ -28,10 +28,10 @@ def fit(x: 'series', y: 'series', deg: int,
     df[y.name] = pd.to_numeric(df[y.name])
 
     # remove outliers
-    if upper_bound:
-        df = df[df[y.name] < upper_bound]
-    if lower_bound:
-        df = df[df[y.name] > lower_bound]
+    if y_upper_bound:
+        df = df[df[y.name] < y_upper_bound]
+    if y_lower_bound:
+        df = df[df[y.name] > y_lower_bound]
     df = df[(np.abs(stats.zscore(df)) < 4).all(axis=1)]
 
     x = getattr(df, x.name)
