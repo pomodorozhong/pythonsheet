@@ -37,6 +37,29 @@ def combine_series_to_dataframe(series_array):
     return dataframe
 
 
+def append_serieses(series1, series2):
+    series1_is_empty = False
+    series2_is_empty = False
+    if series1 is None:
+        series1_is_empty = True
+    elif len(series1) == 0:
+        series1_is_empty = True
+    if series2 is None:
+        series2_is_empty = True
+    elif len(series2) == 0:
+        series2_is_empty = True
+
+    if series1_is_empty and series2_is_empty:
+        return None
+    elif series1_is_empty:
+        return series2
+    elif series2_is_empty:
+        return series1
+
+    out = series1.append(series2, ignore_index=True)
+    return out
+
+
 def fit(x: 'series', y: 'series', deg: int,
         plot_file="",
         upper_bound=None,
