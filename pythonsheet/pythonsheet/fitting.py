@@ -15,6 +15,8 @@ def _fit_poly_through_origin(x, y, n=1):
 
 def fit(x: 'series', y: 'series', deg: int,
         plot_file="",
+        x_upper_bound=None,
+        x_lower_bound=None,
         y_upper_bound=None,
         y_lower_bound=None,
         pass_zero=False):
@@ -32,6 +34,10 @@ def fit(x: 'series', y: 'series', deg: int,
         df = df[df[y.name] < y_upper_bound]
     if y_lower_bound:
         df = df[df[y.name] > y_lower_bound]
+    if x_upper_bound:
+        df = df[df[x.name] < x_upper_bound]
+    if x_lower_bound:
+        df = df[df[x.name] > x_lower_bound]
     df = df[(np.abs(stats.zscore(df)) < 4).all(axis=1)]
 
     x = getattr(df, x.name)
