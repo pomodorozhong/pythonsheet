@@ -1,10 +1,10 @@
-from pythonsheet.pythonsheet import major as pm
-from pythonsheet.pythonsheet import csv_ as csv
-from pythonsheet.pythonsheet import utility as pu
+from pythonsheet import major as pm
+from pythonsheet import csv_ as csv
+from pythonsheet import utility as pu
 
-source_a = 'pythonsheet/usage_example/merge_cols_from_mutiple_csv_into_one_csv/probe.csv'
-source_b = 'pythonsheet/usage_example/merge_cols_from_mutiple_csv_into_one_csv/gauge.csv'
-whole_experiment = 'pythonsheet/usage_example/merge_cols_from_mutiple_csv_into_one_csv/curated.csv'
+source_a = './usage_example/merge_cols_from_mutiple_csv_into_one_csv/probe.csv'
+source_b = './usage_example/merge_cols_from_mutiple_csv_into_one_csv/gauge.csv'
+whole_experiment = './usage_example/merge_cols_from_mutiple_csv_into_one_csv/curated.csv'
 
 measure_a = 'temperature'
 measure_b = 'torsion'
