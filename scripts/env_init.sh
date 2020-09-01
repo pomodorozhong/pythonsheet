@@ -21,7 +21,6 @@ source .venv/bin/activate
 
 # Install dependencies
 pip3 install -r requirements.txt
-pip3 install -e .
 
 # Reset working directory
 cd "$origin_wd"
