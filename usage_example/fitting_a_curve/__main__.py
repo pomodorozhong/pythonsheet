@@ -1,8 +1,8 @@
-from pythonsheet.pythonsheet import utility as pu
-from pythonsheet.pythonsheet import fitting
-from pythonsheet.pythonsheet import csv_ as csv
+from pythonsheet import utility as pu
+from pythonsheet import fitting
+from pythonsheet import csv_ as csv
 
-root_path = "./pythonsheet/usage_example/fitting_a_curve/"
+root_path = "./usage_example/fitting_a_curve/"
 coeff_file = root_path + "coefficients.txt"
 data_files = [
     root_path + "data.csv",
