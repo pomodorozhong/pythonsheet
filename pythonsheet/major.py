@@ -29,3 +29,9 @@ def add(series, num: float):
     out = series + num
 
     return out
+
+
+def multiply(series, num: float):
+    out = series * num
+
+    return out
