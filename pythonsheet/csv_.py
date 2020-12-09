@@ -10,6 +10,11 @@ def get_series(file_name, col):
     return series
 
 
+def get_dataframe(file_name):
+    df = pd.read_csv(file_name)
+    return df
+
+
 def write_table_to_csv(file_name, table):
     f = open(file_name, "w")
     for row in table:
