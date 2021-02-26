@@ -5,6 +5,7 @@ from scipy import stats
 import math
 from . import major as pm
 from . import utility as pu
+from sklearn import linear_model
 
 
 def _fit_poly_through_origin(x, y, n=1):
@@ -69,3 +70,47 @@ def fit(x: 'series', y: 'series', deg: int,
         plt.savefig(plot_file)
 
     return predict
+
+
+def multiple_linear_fit(features: 'list_of_series', target: 'series'):
+    target_name = target.name
+    if target_name is None:
+        target_name = 'target'
+        target.name = target_name
+
+    features_names = []
+    for i in range(len(features)):
+        feature_name = features[i].name
+        if feature_name is None:
+            feature_name = f'feature{i}'
+            features[i].name = feature_name
+
+        features_names.append(feature_name)
+
+    serieses = features
+    serieses.append(target)
+    df = pu.combine_series_to_dataframe(features)
+
+    # remove rows that contains non-numeric
+    for features_name in features_names:
+        df = df[pd.to_numeric(df[features_name], errors='coerce').notnull()]
+        df[features_name] = pd.to_numeric(df[features_name])
+    df = df[pd.to_numeric(df[target_name], errors='coerce').notnull()]
+    df[target_name] = pd.to_numeric(df[target_name])
+
+    # data preparation
+    X = df[features_names].values.reshape((-1, len(features_names)))
+    Y = df[target_name]
+
+    # regression
+    ols = linear_model.LinearRegression()
+    model = ols.fit(X, Y)
+
+    coefficients = model.coef_.tolist()
+    coefficients.append(model.intercept_)
+
+    # Evaluate
+    r2 = model.score(X, Y)
+
+
+    return coefficients, r2
