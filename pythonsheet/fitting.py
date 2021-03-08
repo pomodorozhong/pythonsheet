@@ -6,6 +6,7 @@ import math
 from . import major as pm
 from . import utility as pu
 from sklearn import linear_model
+from scipy.optimize import minimize
 
 
 def _fit_poly_through_origin(x, y, n=1):
@@ -112,5 +113,74 @@ def multiple_linear_fit(features: 'list_of_series', target: 'series'):
     # Evaluate
     r2 = model.score(X, Y)
 
+    return coefficients, r2
+
+
+# Reference: https://apmonitor.com/me575/index.php/Main/NonlinearRegression
+def multiple_quadratic_fit(features: 'list_of_series', target: 'series'):
+
+    def calc_y(x):
+        coeffs = []
+        coeffs.append(x[0])
+        for i in range(len(features)):
+            index = 1 + i*2
+            coeffs.append(x[index])
+            index += 1
+            coeffs.append(x[index])
+
+        y = 0
+        y += coeffs[0]
+        for x_i in range(len(features)):
+            coeff_i = 1 + x_i*2
+            y += coeffs[coeff_i] * features[x_i] ** 2
+            y += coeffs[coeff_i+1] * features[x_i]
+
+        return y
+
+    # define objective
+    def objective(x):
+        y = calc_y(x)
+        obj = 0.0
+        for i in range(len(target)):
+            if target[i] == 0:
+                continue
+            obj += ((y[i]-target[i])/target[i])**2
+            # obj += ((y[i]-target[i]))**2
+
+        return obj
+
+    # initial guesses
+    coeff_guesses = np.zeros(len(features)*2+1)
+
+    # optimize
+    def get_bounds(bounds):
+        tmp = []
+        for i in range(len(features)*2+1):
+            tmp.append(bounds)
+        return tuple(tmp)
+    bnds = get_bounds((-100.0, 100.0))
+    solution = minimize(objective, coeff_guesses, method='SLSQP', bounds=bnds)
+    x = solution.x
+    y = calc_y(x)
+
+    print(x)
+
+    # target measured outcome
+    # y  predicted outcome
+    from scipy import stats
+    slope, intercept, r_value, p_value, std_err = stats.linregress(target, y)
+    r2 = r_value**2
+    print(f'R^2 correlation = {r2}')
+
+    # # plot solution
+    # plt.figure(1)
+    # plt.title('Actual (YM) versus Predicted (Y) Outcomes For Non-Linear Regression')
+    # plt.plot(ym,y,'o')
+    # plt.xlabel('Measured Outcome (YM)')
+    # plt.ylabel('Predicted Outcome (Y)')
+    # plt.grid(True)
+    # plt.show()
+
+    coefficients = x
 
     return coefficients, r2
