@@ -152,13 +152,7 @@ def multiple_quadratic_fit(features: 'list_of_series', target: 'series'):
     coeff_guesses = np.zeros(len(features)*2+1)
 
     # optimize
-    def get_bounds(bounds):
-        tmp = []
-        for i in range(len(features)*2+1):
-            tmp.append(bounds)
-        return tuple(tmp)
-    bnds = get_bounds((-100.0, 100.0))
-    solution = minimize(objective, coeff_guesses, method='SLSQP', bounds=bnds)
+    solution = minimize(objective, coeff_guesses, method='SLSQP')
     x = solution.x
     y = calc_y(x)
 
