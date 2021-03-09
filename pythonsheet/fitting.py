@@ -117,7 +117,7 @@ def multiple_linear_fit(features: 'list_of_series', target: 'series'):
 
 
 # Reference: https://apmonitor.com/me575/index.php/Main/NonlinearRegression
-def multiple_quadratic_fit(features: 'list_of_series', target: 'series'):
+def multiple_quadratic_fit(features: 'list_of_series', target: 'series', minimize_method=None):
 
     def calc_y(x):
         coeffs = []
@@ -152,7 +152,7 @@ def multiple_quadratic_fit(features: 'list_of_series', target: 'series'):
     coeff_guesses = np.zeros(len(features)*2+1)
 
     # optimize
-    solution = minimize(objective, coeff_guesses, method='SLSQP')
+    solution = minimize(objective, coeff_guesses, method=minimize_method)
     x = solution.x
     y = calc_y(x)
 
