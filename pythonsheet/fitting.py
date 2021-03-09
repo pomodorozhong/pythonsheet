@@ -145,7 +145,6 @@ def multiple_quadratic_fit(features: 'list_of_series', target: 'series'):
             if target[i] == 0:
                 continue
             obj += ((y[i]-target[i])/target[i])**2
-            # obj += ((y[i]-target[i]))**2
 
         return obj
 
@@ -163,24 +162,12 @@ def multiple_quadratic_fit(features: 'list_of_series', target: 'series'):
     x = solution.x
     y = calc_y(x)
 
-    print(x)
-
     # target measured outcome
     # y  predicted outcome
     from scipy import stats
     slope, intercept, r_value, p_value, std_err = stats.linregress(target, y)
-    r2 = r_value**2
-    print(f'R^2 correlation = {r2}')
-
-    # # plot solution
-    # plt.figure(1)
-    # plt.title('Actual (YM) versus Predicted (Y) Outcomes For Non-Linear Regression')
-    # plt.plot(ym,y,'o')
-    # plt.xlabel('Measured Outcome (YM)')
-    # plt.ylabel('Predicted Outcome (Y)')
-    # plt.grid(True)
-    # plt.show()
 
     coefficients = x
+    r2 = r_value**2
 
     return coefficients, r2
