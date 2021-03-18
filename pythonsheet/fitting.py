@@ -142,9 +142,7 @@ def multiple_quadratic_fit(features: 'list_of_series', target: 'series', minimiz
         y = calc_y(x)
         obj = 0.0
         for i in range(len(target)):
-            if target[i] == 0:
-                continue
-            obj += ((y[i]-target[i])/target[i])**2
+            obj += ((y[i]-target[i]))**2
 
         return obj
 
