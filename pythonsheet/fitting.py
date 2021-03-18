@@ -117,27 +117,25 @@ def multiple_linear_fit(features: 'list_of_series', target: 'series'):
 
 
 # Reference: https://apmonitor.com/me575/index.php/Main/NonlinearRegression
-def multiple_quadratic_fit(features: 'list_of_series', target: 'series', minimize_method=None):
+def multiple_polynomial_fit(features: 'list_of_series', target: 'series', minimize_method=None):
 
     def calc_y(x):
         coeffs = []
         coeffs.append(x[0])
         for i in range(len(features)):
-            index = 1 + i*2
-            coeffs.append(x[index])
-            index += 1
-            coeffs.append(x[index])
+            index = 1 + i*degree
+            for d in range(degree):
+                coeffs.append(x[index+d])
 
         y = 0
         y += coeffs[0]
         for x_i in range(len(features)):
-            coeff_i = 1 + x_i*2
-            y += coeffs[coeff_i] * features[x_i] ** 2
-            y += coeffs[coeff_i+1] * features[x_i]
+            coeff_i = 1 + x_i*degree
+            for d in range(degree, 0, -1):
+                y += coeffs[coeff_i+d-1] * features[x_i] ** d
 
         return y
 
-    # define objective
     def objective(x):
         y = calc_y(x)
         obj = 0.0
@@ -147,7 +145,7 @@ def multiple_quadratic_fit(features: 'list_of_series', target: 'series', minimiz
         return obj
 
     # initial guesses
-    coeff_guesses = np.zeros(len(features)*2+1)
+    coeff_guesses = np.zeros(len(features)*degree+1)
 
     # optimize
     solution = minimize(objective, coeff_guesses, method=minimize_method)
