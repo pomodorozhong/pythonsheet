@@ -117,7 +117,7 @@ def multiple_linear_fit(features: 'list_of_series', target: 'series'):
 
 
 # Reference: https://apmonitor.com/me575/index.php/Main/NonlinearRegression
-def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'series', minimize_method=None):
+def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'series', minimize_method=None, plot_dir=None):
 
     def calc_y(x):
         coeffs = []
@@ -159,5 +159,18 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
 
     coefficients = x
     r2 = r_value**2
+
+    # plotting
+    if plot_dir != None:
+        if target.name == None:
+            target_name = '[target_name]'
+        plt.clf()
+        plt.figure(1)
+        plt.title(f'Actual versus Predicted Outcomes\nfor multiple {degree} degree polynomial regression')
+        plt.plot(target,y,'1')
+        plt.xlabel('Measured Outcome')
+        plt.ylabel('Predicted Outcome')
+        plt.grid(True)
+        plt.savefig(f'{plot_dir}/{target.name}_actual_vs_predicted.png')
 
     return coefficients, r2
