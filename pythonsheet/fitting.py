@@ -166,6 +166,8 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
             target_name = '[target_name]'
         else:
             target_name = target.name
+        
+        # actual vs predicted
         plt.clf()
         plt.figure(1)
         plt.title(f'Actual versus Predicted Outcomes\nfor multiple {degree} degree polynomial regression')
@@ -174,5 +176,16 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
         plt.ylabel('Predicted Outcome')
         plt.grid(True)
         plt.savefig(f'{plot_dir}/{target_name}_actual_vs_predicted.png')
+
+        # actual vs prediction error
+        plt.clf()
+        y_diff = y - target
+        plt.figure(1)
+        plt.title(f'Actual versus Error of Prediction\nfor multiple {degree} degree polynomial regression')
+        plt.plot(target, y_diff, '1')
+        plt.xlabel('Measured Outcome')
+        plt.ylabel('Error of Predicted Outcome')
+        plt.grid(True)
+        plt.savefig(f'{plot_dir}/{target_name}_vs_prediction_error.png')
 
     return coefficients, r2
