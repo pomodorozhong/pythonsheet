@@ -188,4 +188,19 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
         plt.grid(True)
         plt.savefig(f'{plot_dir}/{target_name}_vs_prediction_error.png')
 
+        # actual vs each feature
+        for i in range(len(features)):
+            if features[i].name == None:
+                feature_name = f'[feature{i}_name]'
+            else:
+                feature_name = features[i].name 
+            plt.clf()
+            plt.figure(1)
+            plt.title(f'Actual versus {feature_name}\nfor multiple {degree} degree polynomial regression')
+            plt.plot(target, features[i], '1')
+            plt.xlabel('Measured Outcome')
+            plt.ylabel(feature_name)
+            plt.grid(True)
+            plt.savefig(f'{plot_dir}/{target_name}_vs_{feature_name}.png')
+
     return coefficients, r2
