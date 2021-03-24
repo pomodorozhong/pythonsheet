@@ -179,17 +179,17 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
 
         # actual vs prediction error
         plt.clf()
-        y_diff = y - target
+        prediction_error = y - target
         plt.figure(1)
         plt.title(f'Actual versus Error of Prediction\nfor multiple {degree} degree polynomial regression')
-        plt.plot(target, y_diff, '1')
+        plt.plot(target, prediction_error, '1')
         plt.xlabel('Measured Outcome')
         plt.ylabel('Error of Predicted Outcome')
         plt.grid(True)
         plt.savefig(f'{plot_dir}/{target_name}_vs_prediction_error.png')
 
-        # actual vs each feature
         for i in range(len(features)):
+            # actual vs each feature
             if features[i].name == None:
                 feature_name = f'[feature{i}_name]'
             else:
@@ -202,5 +202,15 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
             plt.ylabel(feature_name)
             plt.grid(True)
             plt.savefig(f'{plot_dir}/{target_name}_vs_{feature_name}.png')
+
+            # prediction error vs each feature
+            plt.clf()
+            plt.figure(1)
+            plt.title(f'Actual versus {feature_name}\nfor multiple {degree} degree polynomial regression')
+            plt.plot(prediction_error, features[i], '1')
+            plt.xlabel('Error of Predicted Outcome')
+            plt.ylabel(feature_name)
+            plt.grid(True)
+            plt.savefig(f'{plot_dir}/{target_name}_prediction_error_vs_{feature_name}.png')
 
     return coefficients, r2
