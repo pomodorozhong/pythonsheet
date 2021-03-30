@@ -210,7 +210,7 @@ def multiple_polynomial_fit(degree: int, features: 'list_of_series', target: 'se
             plt.clf()
             plt.figure(1)
             plt.title(
-                f'Actual versus {feature_name}\nfor multiple {degree} degree polynomial regression')
+                f'Error versus {feature_name}\nfor multiple {degree} degree polynomial regression')
             plt.plot(prediction_error, features[i], '1')
             plt.xlabel('Error of Predicted Outcome')
             plt.ylabel(feature_name)
@@ -290,7 +290,7 @@ def plot_for_multiple_polynomial_fit(degree: int, features: 'list_of_series', ta
         plt.clf()
         plt.figure(1)
         plt.title(
-            f'Actual versus {feature_name}\nfor multiple {degree} degree polynomial regression')
+            f'Error versus {feature_name}\nfor multiple {degree} degree polynomial regression')
         plt.plot(prediction_error, features[i], '1')
         plt.xlabel('Error of Predicted Outcome')
         plt.ylabel(feature_name)
