@@ -29,6 +29,8 @@ def index(references: 'series', rows_to_extract: 'series'):
 
 
 def combine_series_to_dataframe(series_array):
+    # To-Do: check if the size of x and y is the same.
+    # To-Do: series.reset_index(drop=True)
     dataframe = pd.concat(series_array, axis=1)
     return dataframe
 
