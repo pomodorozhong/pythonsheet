@@ -4,6 +4,15 @@ A tool for basic spreadsheet workflow.
 
 Most of it is a wrapper of `numpy` and `pandas`, plus some random text processing.
 
+## Requirements
+
+Besides `requirements.txt`, the Python version needs to be `3.8`.
+
+- `3.8` works, tested on 2022-03-17.
+- `3.10` fails, tested on 2022-03-17.
+
+Other Python version is not tested.
+
 ## Installation
 
 ### OS X & Linux
