@@ -22,6 +22,18 @@ or using `make` to do above
 make init
 ```
 
+### Windows
+
+```cmd
+cd root\path\of\this\repo
+
+python3 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip3 install -r requirements.txt
+```
+
+If you encounter errors when `.\.venv\Scripts\Activate.ps1`, try run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted` as administrator in Powershell before doing it.
+
 ## Run Usage Examples
 
 ### Use Python directly
